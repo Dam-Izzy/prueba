@@ -1,14 +1,34 @@
 package com.examenpractico.entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+
+@Entity
 public class Job {
-	private Integer id;
+	@Id
+	@GeneratedValue
+	private Integer id_Job;
 	private String name;
 	private double salary;
-	public Integer getId() {
-		return id;
+	@OneToOne(mappedBy = "id_Job", cascade = CascadeType.ALL)
+    private Employee employee;
+	
+	
+
+	public Integer getId_Job() {
+		return id_Job;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId_Job(Integer id_Job) {
+		this.id_Job = id_Job;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	public String getName() {
 		return name;
