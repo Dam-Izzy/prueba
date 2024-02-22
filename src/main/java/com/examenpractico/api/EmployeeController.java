@@ -1,13 +1,11 @@
 package com.examenpractico.api;
 
-import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.examenpractico.entity.Employee;
+import com.examenpractico.po.EmployeePO;
 import com.examenpractico.service.EmployeeService;
 
 @RestController
@@ -20,8 +18,9 @@ public class EmployeeController {
 	  EmployeeController(EmployeeService service) {
 	    this.service = service;
 	  }
-@PostMapping(value ="/addEmployee")
-public Employee addEmployee(@RequestBody Employee newEmployee) throws Exception {
+@PostMapping(value ="/addEmployee", consumes={"application/json"})
+public EmployeePO addEmployee(@RequestBody EmployeePO newEmployee) throws Exception {
+	
 	service.addEmployee(newEmployee);
 //	if (repository.InsertarEmpleado(newEmployee.getName(), newEmployee.getLast_name(), newEmployee.getBirthdate())!=null) {
 //		return repository.save(newEmployee);
@@ -29,9 +28,5 @@ public Employee addEmployee(@RequestBody Employee newEmployee) throws Exception 
   return newEmployee;
 }
 
-@GetMapping("/listEmployee")
-public List<Employee> listEmployee() throws Exception {
-	
-  return null;
-}
+
 }

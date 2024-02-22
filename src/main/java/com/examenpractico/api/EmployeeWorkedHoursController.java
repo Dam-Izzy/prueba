@@ -3,20 +3,19 @@ package com.examenpractico.api;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.examenpractico.entity.EmployeeWorkedHours;
-import com.examenpractico.repository.EmployeeWorkedHoursRepository;
+import com.examenpractico.po.EmployeeWorkedHoursPO;
+import com.examenpractico.service.EmployeeWorkedHoursService;
 @RestController
 public class EmployeeWorkedHoursController {
-	private final EmployeeWorkedHoursRepository employeeWorkedHoursRepository;
+	private final EmployeeWorkedHoursService service;
 
-	public EmployeeWorkedHoursController(EmployeeWorkedHoursRepository employeeWorkedHoursRepository) {
-		this.employeeWorkedHoursRepository= employeeWorkedHoursRepository;
+	public EmployeeWorkedHoursController(EmployeeWorkedHoursService service) {
+		this.service= service;
 	}
 	
 	@PostMapping(value ="/addHours")
-	EmployeeWorkedHours newEmployee(@RequestBody EmployeeWorkedHours newEmployeeWorkedHours) throws Exception {
+	EmployeeWorkedHoursPO newEmployee(@RequestBody EmployeeWorkedHoursPO newEmployeeWorkedHoursPO) throws Exception {
 	
-	  return employeeWorkedHoursRepository.save(newEmployeeWorkedHours);
+	  return service.addWorkedHours(newEmployeeWorkedHoursPO);
 	}
 }

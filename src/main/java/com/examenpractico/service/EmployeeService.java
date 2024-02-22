@@ -1,8 +1,10 @@
 package com.examenpractico.service;
 
 
-import com.examenpractico.entity.Employee;
+
+
+import com.examenpractico.po.EmployeePO;
 
 public interface EmployeeService {
-	public Boolean addEmployee(Employee employee);
+	public Boolean addEmployee(EmployeePO employee);
 }

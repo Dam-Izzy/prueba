@@ -13,10 +13,13 @@ public class Job {
 	private Integer id_Job;
 	private String name;
 	private double salary;
-	@OneToOne(mappedBy = "id_Job", cascade = CascadeType.ALL)
-    private Employee employee;
+//	@OneToOne(mappedBy = "Job", cascade = CascadeType.ALL)
+//    private Employee employee;
 	
-	
+ Job() {
+		// TODO Auto-generated method stub
+
+	}
 
 	public Integer getId_Job() {
 		return id_Job;
@@ -24,12 +27,12 @@ public class Job {
 	public void setId_Job(Integer id_Job) {
 		this.id_Job = id_Job;
 	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+//	public Employee getEmployee() {
+//		return employee;
+//	}
+//	public void setEmployee(Employee employee) {
+//		this.employee = employee;
+//	}
 	public String getName() {
 		return name;
 	}

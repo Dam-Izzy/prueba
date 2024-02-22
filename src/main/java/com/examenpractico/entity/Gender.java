@@ -1,5 +1,8 @@
 package com.examenpractico.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,13 +11,15 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Gender {
+    @JsonCreator
+	public Gender(){}
 	@Id
 	@GeneratedValue
 	private Integer gender_id;
 	private String name;
-	
-	@OneToOne(mappedBy = "gender_id", cascade = CascadeType.ALL)
-    private Employee employee;
+//	@JsonProperty("gender_id")
+//	@OneToOne(mappedBy = "gender", cascade = CascadeType.ALL)
+//    private Employee employee;
 
 	
 
@@ -24,12 +29,12 @@ public class Gender {
 	public void setGender_id(Integer gender_id) {
 		this.gender_id = gender_id;
 	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+//	public Employee getEmployee() {
+//		return employee;
+//	}
+//	public void setEmployee(Employee employee) {
+//		this.employee = employee;
+//	}
 	public String getName() {
 		return name;
 	}
