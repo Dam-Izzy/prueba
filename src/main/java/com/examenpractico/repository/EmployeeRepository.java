@@ -1,16 +1,24 @@
 package com.examenpractico.repository;
 
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.examenpractico.entity.Employee;
-import com.examenpractico.po.EmployeePO;
-@Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+
 	
-		
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+	
+	List<Employee> findEmployeeByNameAndLastName(String name, String lastName);
+	
+	@Query(value = "SELECT * FROM EMPLOYEES E INNER JOIN JOBS J ON J.ID_JOB = E.JOB_ID WHERE E.JOB_ID=:id", nativeQuery = true)
+	List<Employee> findEmployeeByJob(Long id);
+	
+	@Query(value = "SELECT * FROM EMPLOYEES E  INNER JOIN JOBS J ON J.ID_JOB = E.JOB_ID  WHERE  J.SALARY BETWEEN :min  AND :max ", nativeQuery = true)
+	List<Employee> findEmployeesBySalaryRange(double min, double max);
+	
 	//Employee saveEmployee(Employee employe)  throws Exception;
 /*
 	@Query(value = "CALL ConsultarEmpleadoPorPuesto(:p_name);", nativeQuery = true)

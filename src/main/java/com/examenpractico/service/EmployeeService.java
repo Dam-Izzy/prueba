@@ -3,8 +3,19 @@ package com.examenpractico.service;
 
 
 
-import com.examenpractico.po.EmployeePO;
+import java.util.List;
+import java.util.Optional;
+
+
+import com.examenpractico.entity.Employee;
+
+
 
 public interface EmployeeService {
-	public Boolean addEmployee(EmployeePO employee);
+	public Employee addEmployee(Employee employee);
+	public List<Employee> searchEmployeeByNameAndLastName(String name, String lastName);
+	public Optional<Employee> findEmployeeById(Long id);
+	public List<Employee> findEmployeeJobId(Long id);
+	List<Employee> findEmployeesBySalaryRange(double min, double max, String order, int size);
+
 }

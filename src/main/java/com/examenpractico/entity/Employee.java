@@ -1,9 +1,10 @@
 package com.examenpractico.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,99 +12,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 @Entity
 @Table(name  ="Employees")
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
-	public Employee() {
-		// TODO Auto-generated constructor stub
-	}
-	
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idEmployees;
+	private Long idEmployees;
 	
 	private String name;
-	private String last_name;
-	private Date birthdate;
-	private Integer gender_id;
-	private Integer job_id;
+	private String lastName;
+	private LocalDate  birthdate;
+	//private int jobId;
+	//private int genderId;
+
 	
-//	@OneToOne
-//	@JoinColumn(name = "GENDER")
-//	@JsonIgnore
-//	private Gender gender;
-//	
-//	@OneToOne
-//	@JoinColumn(name = "Job")
-//	@JsonIgnore
-//	private Job Job;
+	@OneToOne
+	@JoinColumn(name = "JOB_ID")
+	private Job job;
+	
+	@OneToOne
+	@JoinColumn(name = "GENDER_ID")
+	private Gender gender;
 
-	public Integer getIdEmployees() {
-		return idEmployees;
-	}
-
-	public void setIdEmployees(Integer idEmployees) {
-		this.idEmployees = idEmployees;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLast_name() {
-		return last_name;
-	}
-
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-
-	public Date getBirthdate() {
-		return birthdate;
-	}
-
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
-	}
-
-
-	public Integer getGender_id() {
-		return gender_id;
-	}
-
-	public void setGender_id(Integer gender_id) {
-		this.gender_id = gender_id;
-	}
-
-	public Integer getJob_id() {
-		return job_id;
-	}
-
-	public void setJob_id(Integer job_id) {
-		this.job_id = job_id;
-	}
-
-//	public Gender getGender() {
-//		return gender;
-//	}
-//
-//	public void setGender(Gender gender) {
-//		this.gender = gender;
-//	}
-//
-//	public Job getJob() {
-//		return Job;
-//	}
-//
-//	public void setJob(Job job) {
-//		Job = job;
-//	}
-//	
 	
 	
 
