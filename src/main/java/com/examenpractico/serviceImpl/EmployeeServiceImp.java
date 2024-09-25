@@ -1,45 +1,53 @@
 package com.examenpractico.serviceImpl;
 
-import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.examenpractico.po.EmployeePO;
-import com.examenpractico.po.EmployeeWorkedHoursPO;
+import com.examenpractico.entity.Employee;
+import com.examenpractico.repository.EmployeeRepository;
 import com.examenpractico.service.EmployeeService;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.ParameterMode;
-import jakarta.persistence.StoredProcedureQuery;
+
+
+
+
 @Service
 public class EmployeeServiceImp implements EmployeeService {
 	
 	@Autowired
-    EntityManager entityManager;
+	EmployeeRepository employeeRepository;
+	 
 	@Override
-	public Boolean addEmployee(EmployeePO employeePO) {
+	public Employee addEmployee(Employee employee) {
 		
-		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("InsertarEmpleado");
-		// set parameters
-		storedProcedure.registerStoredProcedureParameter("p_gender_id", Integer.class, ParameterMode.IN);
-		storedProcedure.registerStoredProcedureParameter("p_job_id", Integer.class, ParameterMode.IN);
-		storedProcedure.registerStoredProcedureParameter("name", String.class, ParameterMode.IN);
-		storedProcedure.registerStoredProcedureParameter("last_name", String.class, ParameterMode.IN);
-		storedProcedure.registerStoredProcedureParameter("birthdate", Date.class, ParameterMode.IN);
+		return employeeRepository.save(employee);
 		
-		storedProcedure.setParameter("p_gender_id", employeePO.getGender_id());
-		storedProcedure.setParameter("p_job_id", employeePO.getJob_id());
-		storedProcedure.setParameter("name", employeePO.getName());
-		storedProcedure.setParameter("last_name", employeePO.getLast_name());
-		storedProcedure.setParameter("birthdate", employeePO.getBirthdate());
-		
+	}
 
-		
-		// execute SP
+	@Override
+	public List<Employee> searchEmployeeByNameAndLastName(String name, String lastName) {
+				
+		return employeeRepository.findEmployeeByNameAndLastName(name, lastName);
+	}
 
-		return storedProcedure.execute();
+	@Override
+	public Optional<Employee> findEmployeeById(Long id) {
+		return employeeRepository.findById(id);
+	}
+
+	@Override
+	public List<Employee> findEmployeeJobId(Long id) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findEmployeeByJob(id);
+	}
+
+	@Override
+	public List<Employee> findEmployeesBySalaryRange(double min, double max, String order, int size) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findEmployeesBySalaryRange(min, max);
 	}
 	
 

@@ -1,48 +1,28 @@
 package com.examenpractico.entity;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
+@Table(name = "JOBS")
+@Data
 public class Job {
 	@Id
 	@GeneratedValue
-	private Integer id_Job;
+	private Long idJob;
 	private String name;
 	private double salary;
-//	@OneToOne(mappedBy = "Job", cascade = CascadeType.ALL)
-//    private Employee employee;
-	
- Job() {
-		// TODO Auto-generated method stub
 
-	}
+	@OneToOne
+	@JoinColumn(name="idJob")
+	@JsonIgnore
+	private Employee employee;
 
-	public Integer getId_Job() {
-		return id_Job;
-	}
-	public void setId_Job(Integer id_Job) {
-		this.id_Job = id_Job;
-	}
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public double getSalary() {
-		return salary;
-	}
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
 }
